@@ -1,0 +1,55 @@
+﻿@model Assignment.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "AddItems";
+}
+
+<h2>AddItems:</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+
+    <form method="post" action="/Home/AddItems">
+
+        @if (ViewBag.error == true) { 
+            <div class="alert alert-danger" role="alert">
+              Value cannot be negative
+            </div>
+        }
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="name" name="name" class="form-control" required value="@if (ViewBag.Restore1 != null) { @ViewBag.Restore1 ; }">
+        </div>
+        
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="description" name="description" class="form-control" rows="3" required>@if (ViewBag.Restore2 != null) {@ViewBag.Restore2}</textarea>
+        </div>
+        
+        <div class="form-group">
+              <label>Brand</label>
+            <select class="form-control" id="brand" name="brand">
+                <option>Bajaj</option>
+                <option>Accenture</option>
+                <option>Honda</option>
+            </select>
+         </div>
+
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" required value="@if (ViewBag.Restore4 != null) {@ViewBag.Restore4;}">
+        </div>
+
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" id="price" name="price" class="form-control" required value="@if (ViewBag.Restore5 != null) {@ViewBag.Restore5;}">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <span class="btn btn-warning"> <a href="/Home/Index"> Cancel </a> </span>
+    </form>
+}

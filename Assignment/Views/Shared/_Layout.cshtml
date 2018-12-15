@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <!-- For Menu/navbar-->
+    <!-- Bootstrap Core CSS -->
+    <link href="~/resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link href="~/resources/css/style-new.css" rel='stylesheet' type='text/css' />
+
+    <!-- Graph CSS -->
+    <link href="~/resources/css/font-awesome.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <!-- lined-icons -->
+    <link rel="stylesheet" href="~/resources/css/icon-font.min.css" type='text/css' />
+
+    <!-- Meters graphs -->
+    <script src="~/resources/js/jquery-1.10.2.min.js"></script>
+    <!-- For Menu/navbar end-->
+</head>
+<body>
+    
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+
+    <div class="row" style="border:2px solid;">
+        <div class="col-xs-1">
+            @* Menu *@
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="/">Bike<span style="color:green;">Wale</span></a>
+                <a href="/Home/List">All Products</a>
+                <a href="/Home/AddItems">Add Products</a>                
+            </div>
+
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+        </div>
+
+        <div class="col-md-9">
+            <div class="row-md-12">
+                @* Body *@
+                @RenderBody()
+            </div>
+
+            <div class="row-md-12">
+                @* Footer*@
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
+
+        </div>
+
+    </div>
+
+        
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/resources/js/jquery.nicescroll.js"></script>
+    <script src="~/resources/js/scripts.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/resources/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
