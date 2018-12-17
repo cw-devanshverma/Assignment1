@@ -1,8 +1,20 @@
 ﻿@{
-    ViewBag.Title = "List";
+    ViewBag.Title = "List of all currently available bikes - BikeWale";
 }
 
-<h2>List:</h2>
+<h1 class="left-align" style="color: #f18b8f; ">List of Bikes:</h1>
+<blockquote>
+    <p class="flow-text">List of all bike available and there detailed descrption.</p>
+</blockquote>
+
+
+@if (ViewBag.result != null)
+{
+    <div class="alert alert-success" role="alert">@ViewBag.result</div>
+}
+
+
+
 
 <table class="table">
     <thead class="thead-light">
@@ -17,8 +29,10 @@
         </tr>
     </thead>
     <tbody>
-        @if (ViewBag.Items != null) { 
-            foreach (Assignment.Controllers.Product p in ViewBag.Items){
+        @if (ViewBag.Items != null)
+        {
+            foreach (Assignment.Controllers.Product p in ViewBag.Items)
+            {
                 <tr>
                     <td scope="row">@p.Id</td>
                     <td>@p.Name</td>
@@ -27,19 +41,18 @@
                     <td>@p.Quantity</td>
                     <td>@p.Price</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { pid = p.Id }) |
-                        @Html.ActionLink("Delete", "DeleteL", new { id = p.Id }) 
+                        @Html.ActionLink("Edit", "Edit", new { pid = p.Id }, new { title = "Edit item" }) |
+                        @Html.ActionLink("Delete", "DeleteL", new { id = p.Id }, new { title = "Delete item" })
 
                     </td>
                 </tr>
             }
-        }else{
+        }
+        else
+        {
             <tr>
                 <td colspan="6">No product</td>
-            </tr>            
-        }        
+            </tr>
+        }
     </tbody>
 </table>
-
-
-
