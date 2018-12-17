@@ -1,4 +1,11 @@
-﻿//Import Statements
+﻿// This assignment is one by Devansh Verma
+/*
+ * There are 4 pages namely front page, product listing page, product editing page and product addition page. 
+ * Bootstrap, Materiaize and basic HTML and CSS is used.
+ * 
+ */
+
+//Import Statements
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +15,6 @@ using Assignment;
 
 namespace Assignment.Controllers
 {
-
     //class for all the products present
     public class Product
     {
@@ -34,33 +40,12 @@ namespace Assignment.Controllers
 
     public class HomeController : Controller
     {
-        //static int var = 1;
-
         //Global list of products
         public static List<Product> products = new List<Product>(){
             new Product("Activa", "Honda", "Scooty", 10, 50000),
             new Product("Activa2", "Maruiti", "Scooty", 8, 50300),
             new Product("Activa3", "BMW", "Scooty", 5, 53000)
         };
-
-        //public void once()
-        //{
-        //    if (var == 1)
-        //    {
-        //        Product p1 = new Product("Activa", "Honda", "Scooty", 10, 50000);
-        //        Product p2 = new Product("Activa2", "Maruiti", "Scooty", 8, 50300);
-        //        Product p3 = new Product("Activa3", "BMW", "Scooty", 5, 53000);
-
-        //        products.Add(p1);
-        //        products.Add(p2);
-        //        products.Add(p3);
-
-        //        var++;
-        //    }
-
-        //    Console.Write(products.Count);
-        //}           
-
 
         //Homepage
         public ActionResult Index()
@@ -135,7 +120,10 @@ namespace Assignment.Controllers
                 }
             }
 
-            return RedirectToAction("List");
+            ViewBag.result = "Record Edited Successfully!";
+            @ViewBag.Items = products;
+
+            return View("List");
         }
 
         //Add item to the list via GET method 
@@ -153,21 +141,23 @@ namespace Assignment.Controllers
             //Validate
             if (quantity < 0 || price < 0)
             {
-                @ViewBag.Restore1 = name;
-                @ViewBag.Restore2 = description;
-                @ViewBag.Restore3 = brand;
-                @ViewBag.Restore4 = quantity;
-                @ViewBag.Restore5 = price;
+                @ViewBag.name = name;
+                @ViewBag.description = description;
+                @ViewBag.brand = brand;
+                @ViewBag.quantity = quantity;
+                @ViewBag.price = price;
 
                 @ViewBag.error = true;
                 return View();
             }
 
+            ViewBag.result = "Record Inserted Successfully!";
+            @ViewBag.Items = products;
 
             Product p = new Product(name, brand, description, quantity, price);
             products.Add(p);
 
-            return RedirectToAction("List");
+            return View("List");
         }
 
     }

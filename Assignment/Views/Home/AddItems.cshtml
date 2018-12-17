@@ -1,55 +1,135 @@
 ﻿@model Assignment.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "AddItems";
+    ViewBag.Title = "Add Item to the list - BikeWale";
 }
 
-<h2>AddItems:</h2>
+<h1 class="left-align" style="color: #f18b8f; ">AddItems:</h1>
+<blockquote>
+    <p class="flow-text">Fill the below form and add an item to the list</p>
+</blockquote>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-
     <form method="post" action="/Home/AddItems">
 
-        @if (ViewBag.error == true) { 
+        @if (ViewBag.error == true)
+        {
             <div class="alert alert-danger" role="alert">
-              Value cannot be negative
+                Value cannot be negative
             </div>
         }
 
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" id="name" name="name" class="form-control" required value="@if (ViewBag.Restore1 != null) { @ViewBag.Restore1 ; }">
+        @*<div class="form-group">
+                <label>Name</label>
+                <input type="text" id="name" name="name" class="form-control" required value="@if (ViewBag.Restore1 != null) { @ViewBag.Restore1 ; }">
+            </div>*@
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="name" name="name" type="text" maxlength="10" value="@if (ViewBag.name != null) { @ViewBag.name ; }" required>
+                <label for="name">Name</label>
+            </div>
         </div>
-        
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="description" name="description" class="form-control" rows="3" required>@if (ViewBag.Restore2 != null) {@ViewBag.Restore2}</textarea>
+
+        @*<div class="form-group">
+                <label>Description</label>
+                <textarea id="description" name="description" class="form-control" rows="3" required>@if (ViewBag.Restore2 != null) {@ViewBag.Restore2}</textarea>
+            </div>*@
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <textarea id="textarea2" name="description" class="materialize-textarea" data-length="120" maxlength="120" style="white-space: pre-wrap;" required>
+                    @if (ViewBag.description != null)
+                    {@ViewBag.description}
+            </textarea>
+            <label for="textarea2">Textarea</label>
         </div>
-        
-        <div class="form-group">
-              <label>Brand</label>
-            <select class="form-control" id="brand" name="brand">
-                <option>Bajaj</option>
-                <option>Accenture</option>
-                <option>Honda</option>
+    </div>
+
+    <div class="row">
+        <div class="form-group col s12">
+            <label style="font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif; font-size: 1rem;">Brand</label>
+            <select class="form-control" id="brand" name="brand" required>
+                <option value="">Select a Brand</option>
+                <option value="Bajaj">Bajaj</option>
+                <option value="Accenture">Accenture</option>
+                <option value="Honda">Honda</option>
             </select>
-         </div>
-
-        <div class="form-group">
-            <label>Quantity</label>
-            <input type="number" id="quantity" name="quantity" class="form-control" required value="@if (ViewBag.Restore4 != null) {@ViewBag.Restore4;}">
+        </div>
+    </div>
+    @*<!-- Dropdown Trigger -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <div style=" margin-left: 40px;">
+                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Select a Brand</a>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Price</label>
-            <input type="number" id="price" name="price" class="form-control" required value="@if (ViewBag.Restore5 != null) {@ViewBag.Restore5;}">
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="#!">Bajaj</a></li>
+            <li><a href="#!">Accenture</a></li>
+            <li><a href="#!">Honda</a></li>
+        </ul>*@
+
+    <div class="row">
+        @*<div class="form-group">
+                <label>Quantity</label>
+                <input type="number" id="quantity" name="quantity" class="form-control" required value="@if (ViewBag.Restore4 != null) {@ViewBag.Restore4;}">
+            </div>*@
+        <div class="input-field col s6">
+            <i class="material-icons prefix">all_inclusive</i>
+            <input id="quantity" name="quantity" type="number" min="1" max="5" value="@if (ViewBag.quantity != null)   {@ViewBag.quantity;}" required>
+            <label for="quantity">Quantity</label>
         </div>
 
+        @*<div class="form-group">
+                <label>Price</label>
+                <input type="number" id="price" name="price" class="form-control" required value="@if (ViewBag.Restore5 != null) {@ViewBag.Restore5;}">
+            </div>*@
+        <div class="input-field col s6">
+            <i class="material-icons prefix">attach_money</i>
+            <input id="price" name="price" type="number" required value="@if (ViewBag.price != null) {@ViewBag.price;}" min="1" max="5">
+            <label for="price">Price</label>
+        </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <span class="btn btn-warning"> <a href="/Home/Index"> Cancel </a> </span>
-    </form>
+    <button type="submit" class="waves-effect waves-dark btn btn-primary btn-small tooltipped" data-position="bottom" data-tooltip="Submit Form"><i class="material-icons left">send</i>Submit</button>
+    <a href="/Home/index" class="btn btn-danger btn-small white-text tooltipped" data-position="bottom" data-tooltip="Cancel Form"><i class="material-icons left">cancel</i>Cancel</a>
+
+</form>
 }
+
+
+
+
+<script>
+    ////dropdown
+    //document.addEventListener('DOMContentLoaded', function () {
+    //    var elems = document.querySelectorAll('.dropdown-trigger');
+    //    var instances = M.Dropdown.init(elems, {
+    //        coverTrigger: false,
+    //        //onOpenEnd: function () {
+    //        //    var instance = M.Dropdown.getInstance(elem);
+    //        //    console.log(instance.dropdownEl);
+    //        //}
+    //    });
+    //});
+
+    //Tooltip
+    $(document).ready(function () {
+        $('.tooltipped').tooltip();
+    });
+
+    //Textarea Char counter
+    $(document).ready(function () {
+        $('input#input_text, textarea#textarea2').characterCounter();
+    });
+
+</script>

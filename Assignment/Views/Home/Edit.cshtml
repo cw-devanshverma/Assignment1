@@ -1,50 +1,55 @@
 ﻿@{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit an item - BikeWale";
 }
 
-<h2>Edit:</h2>
+<h1 class="left-align" style="color: #f18b8f; ">Edit Item:</h1>
+<blockquote>
+    <p class="flow-text">Fill the below form and edit an item to the list</p>
+</blockquote>
 
 @using (Html.BeginForm())
-{    
-    <form method="post" action="/Home/">
+{
+    <form method="post" action="/Home/Edit">
         <div class="form-group">
             <label>Id</label>
             <input type="text" id="pid" name="pid" class="form-control" value="@ViewBag.prod.Id" disabled>
         </div>
 
-        
+
         <div class="form-group">
             <label>Name</label>
-            <input type="text" id="name" name="name" class="form-control" value="@ViewBag.prod.Name">
-        </div>        
+            <input type="text" id="name" name="name" class="form-control" value="@ViewBag.prod.Name" maxlength="10">
+        </div>
 
         <div class="form-group">
             <label>Description</label>
-            <textarea id="description" name="description" class="form-control" rows="3">@ViewBag.prod.Description</textarea>
-        </div>        
+            <textarea id="description" name="description" class="form-control" rows="3" maxlength="120" required>@ViewBag.prod.Description</textarea>
+        </div>
 
         <div class="form-group">
             <label>Brand</label>
-            <select class="form-control" id="brand" name="brand">
-                <option>Bajaj</option>
-                <option>Accenture</option>
-                <option>Honda</option>
+            <select class="form-control" id="brand" name="brand" required>
+                <option value="">Select Brand</option>
+                <option value="Bajaj">Bajaj</option>
+                <option value="Accenture">Accenture</option>
+                <option value="Honda">Honda</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Quantity</label>
-            <input type="number" id="quantity" name="quantity" class="form-control" value="@ViewBag.prod.Quantity">
+            <input type="number" id="quantity" name="quantity" class="form-control" value="@ViewBag.prod.Quantity" min="1" max="5">
         </div>
 
         <div class="form-group">
             <label>Price</label>
-            <input type="number" id="price" name="price" class="form-control" value="@ViewBag.prod.Price">
+            <input type="number" id="price" name="price" class="form-control" value="@ViewBag.prod.Price" min="1" max="5">
         </div>
 
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <span class="btn btn-warning"> <a href="/Home/Index"> Cancel </a> </span>
+        <button type="submit" class="waves-effect waves-dark btn btn-primary btn-small tooltipped" data-position="bottom" data-tooltip="Submit Form"><i class="material-icons left">send</i>Submit</button>
+        <a href="/Home/index" class="btn btn-danger btn-small white-text tooltipped" data-position="bottom" data-tooltip="Cancel Form"><i class="material-icons left">cancel</i>Cancel</a>
+
     </form>
 }
 
