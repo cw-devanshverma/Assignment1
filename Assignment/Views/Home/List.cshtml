@@ -13,9 +13,6 @@
     <div class="alert alert-success" role="alert">@ViewBag.result</div>
 }
 
-
-
-
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -31,7 +28,7 @@
     <tbody>
         @if (ViewBag.Items != null)
         {
-            foreach (Assignment.Controllers.Product p in ViewBag.Items)
+            foreach (Assignment.Models.Product p in ViewBag.Items )
             {
                 <tr>
                     <td scope="row">@p.Id</td>
@@ -41,11 +38,11 @@
                     <td>@p.Quantity</td>
                     <td>@p.Price</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { pid = p.Id }, new { title = "Edit item" }) |
+                        @Html.ActionLink("Edit", "EditProduct", new { pid = p.Id }, new { title = "Edit item" }) |
                         @Html.ActionLink("Delete", "DeleteL", new { id = p.Id }, new { title = "Delete item" })
 
                     </td>
-                </tr>
+                </tr>   
             }
         }
         else
